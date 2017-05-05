@@ -1,0 +1,15 @@
+INPUT(
+./debug\ItemPage.o
+./debug\LoginDialog.o
+./debug\MainWindow.o
+./debug\ConfigReader.o
+./debug\DbAdapter.o
+./debug\main.o
+./debug\DrinksPageModel.o
+./debug\DrinkPage.o
+./debug\moc_ItemPage.o
+./debug\moc_LoginDialog.o
+./debug\moc_MainWindow.o
+./debug\moc_ConfigReader.o
+./debug\moc_DbAdapter.o
+);

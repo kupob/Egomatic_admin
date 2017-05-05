@@ -22,19 +22,34 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+SUBDIRS += \
+    Forms \
+    Utils
 
-SOURCES += main.cpp\
-    LoginDialog.cpp \
-    MainWindow.cpp \
-    DbAdapter.cpp \
-    ConfigReader.cpp
+FORMS += \
+    Forms/ItemPage.ui \
+    Forms/LoginDialog.ui \
+    Forms/MainWindow.ui
 
-HEADERS  += \
-    LoginDialog.h \
-    MainWindow.h \
-    DbAdapter.h \
-    ConfigReader.h
+HEADERS += \
+    Forms/ItemPage.h \
+    Forms/LoginDialog.h \
+    Forms/MainWindow.h \
+    Utils/ConfigReader.h \
+    Utils/DbAdapter.h \
+    Models/DrinksPageModel.h \
+    ORM/Drink.h \
+    Forms/DrinkPage.h
 
-FORMS    += \
-    LoginDialog.ui \
-    MainWindow.ui
+SOURCES += \
+    Forms/ItemPage.cpp \
+    Forms/LoginDialog.cpp \
+    Forms/MainWindow.cpp \
+    Utils/ConfigReader.cpp \
+    Utils/DbAdapter.cpp \
+    main.cpp \
+    Models/DrinksPageModel.cpp \
+    Forms/DrinkPage.cpp
+
+
+

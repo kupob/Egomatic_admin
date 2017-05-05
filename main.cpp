@@ -1,7 +1,7 @@
-#include "MainWindow.h"
-#include "LoginDialog.h"
-#include "DbAdapter.h"
-#include "ConfigReader.h"
+#include "Forms/MainWindow.h"
+#include "Forms/LoginDialog.h"
+#include "Utils/DbAdapter.h"
+#include "Utils/ConfigReader.h"
 #include <QApplication>
 #include <QDebug>
 
