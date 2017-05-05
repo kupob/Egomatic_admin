@@ -11,8 +11,8 @@ LoginDialog::LoginDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->loginButton, &QPushButton::clicked, this, &LoginDialog::checkAuth);
-    connect(ui->cancelButton, &QPushButton::clicked, this, &QWidget::close);
+    connect(ui->loginButton, SIGNAL(clicked()), this, SLOT(checkAuth()));
+    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(close()));
 }
 
 LoginDialog::~LoginDialog()
@@ -28,10 +28,14 @@ void LoginDialog::checkAuth()
     QString passwordEncr = QCryptographicHash::hash(userNameEncr.toUtf8() + password.toUtf8(), QCryptographicHash::Md5).toHex();
 
     DbAdapter *db = DbAdapter::instance();
-    bool ok = db->getResult(QString("SELECT userid FROM sys_user WHERE login = '%1' AND password = '%2' LIMIT 1;").arg(userName, passwordEncr));
+    QList< QList<QVariant> > data;
+    bool ok = db->getResult(QString("SELECT userid FROM sys_user WHERE login = '%1' AND password = '%2' LIMIT 1;").arg(userName, passwordEncr), data);
 
     if (ok)
+    {
         emit authSuccess();
+        close();
+    }
     else
     {
         emit authFailed();

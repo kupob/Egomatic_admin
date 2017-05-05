@@ -18,7 +18,7 @@ public:
                           QString password,
                           int port= 0);
 
-    bool getResult(QString selectionQuery);
+    bool getResult(QString selectionQuery, QList< QList<QVariant> >& data);
 
 private:
     static DbAdapter* _pinstance;

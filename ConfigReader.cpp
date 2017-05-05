@@ -2,6 +2,8 @@
 
 #include <QFile>
 #include <QList>
+#include <QDebug>
+#include <QDir>
 
 ConfigReader::ConfigReader() :
     QObject(),
@@ -11,7 +13,7 @@ ConfigReader::ConfigReader() :
     _dbPassword (""),
     _dbPort     (0)
 {
-    QFile file (configFileName);
+    QFile file (QDir::currentPath() + "/" + configFileName);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         while (!file.atEnd()) {
@@ -30,7 +32,10 @@ ConfigReader::~ConfigReader()
 
 void ConfigReader::processLine(QByteArray line)
 {
-    if (line.at(0) == '#')
+    if (line.isEmpty())
+        return;
+    if (line.at(0) == '#' ||
+        line.at(0) == '\n')
         return;
 
     QList<QByteArray> lineSplit = line.split(' ');
@@ -40,6 +45,8 @@ void ConfigReader::processLine(QByteArray line)
 
     QString code = lineSplit.at(0);
     QString value = lineSplit.at(1);
+    code.remove('\n');
+    value.remove('\n');
 
     if (code == "DB_HOST")
         _dbHost = value;

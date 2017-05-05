@@ -30,26 +30,34 @@ bool DbAdapter::createConnection(QString hostName, QString dataBaseName, QString
         _db.setPort(port);
 
     bool result =_db.open();
-    qDebug() << _db.lastError().text();
+    if (!result)
+        qDebug() << _db.lastError().text();
+
+    return result;
 }
 
-bool DbAdapter::getResult(QString selectionQuery)
+bool DbAdapter::getResult(QString selectionQuery, QList< QList<QVariant> >& data)
 {
     if (!_db.isOpen())
         return false;
+    if (!data.isEmpty())
+        data.clear();
 
-    QSqlQuery query(selectionQuery);
+    QSqlQuery query(selectionQuery, _db);
     query.exec();
 
     while (query.next())
     {
        int i = 0;
+       QList<QVariant> singleResult;
        while (query.value(i).isValid())
        {
-           QString field = query.value(i).toString();
+           singleResult.append(query.value(i));
            i++;
        }
+       if (!singleResult.isEmpty())
+           data.append(singleResult);
     }
 
-    return true;
+    return !data.isEmpty();
 }

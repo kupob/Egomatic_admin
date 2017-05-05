@@ -14,8 +14,6 @@ int main(int argc, char *argv[])
     pathList.append(a.applicationDirPath() +"/sqldrivers");
     a.setLibraryPaths(pathList);
 
-    qDebug() << a.libraryPaths().join(";");
-
     ConfigReader configReader;
 
     DbAdapter *dbAdapter = DbAdapter::instance();
@@ -30,6 +28,12 @@ int main(int argc, char *argv[])
 
     LoginDialog loginDialog;
     loginDialog.show();
+
+    MainWindow mainWindow;
+    mainWindow.show();
+    mainWindow.hide();
+
+    a.connect(&loginDialog, SIGNAL(authSuccess()), &mainWindow, SLOT(show()));
 
     return a.exec();
 }
