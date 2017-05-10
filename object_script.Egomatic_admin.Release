@@ -7,6 +7,10 @@ INPUT(
 ./release\main.o
 ./release\DrinksPageModel.o
 ./release\DrinkPage.o
+./release\DrinkGateway.o
+./release\ControllerGateway.o
+./release\ControllerPage.o
+./release\ControllerPageModel.o
 ./release\moc_ItemPage.o
 ./release\moc_LoginDialog.o
 ./release\moc_MainWindow.o

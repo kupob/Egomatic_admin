@@ -1,6 +1,7 @@
 #include "DrinkPage.h"
 #include "ui_ItemPage.h"
 #include <Utils/DbAdapter.h>
+#include <ORM/DrinkGateway.h>
 
 DrinkPage::DrinkPage(QWidget *parent) :
     ItemPage(parent)
@@ -29,10 +30,18 @@ void DrinkPage::removeItem()
 
 void DrinkPage::save()
 {
+    QList<Drink> drinks = _model->getDrinks();
+    DrinkGateway drinkGateway;
 
+    bool ok = false;
+    if (!drinks.isEmpty())
+        ok = drinkGateway.saveDrinks(drinks);
+
+    if (ok)
+        _model->resetData();
 }
 
 void DrinkPage::cancel()
 {
-
+    _model->resetData();
 }

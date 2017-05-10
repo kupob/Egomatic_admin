@@ -7,6 +7,10 @@ INPUT(
 ./debug\main.o
 ./debug\DrinksPageModel.o
 ./debug\DrinkPage.o
+./debug\DrinkGateway.o
+./debug\ControllerGateway.o
+./debug\ControllerPage.o
+./debug\ControllerPageModel.o
 ./debug\moc_ItemPage.o
 ./debug\moc_LoginDialog.o
 ./debug\moc_MainWindow.o

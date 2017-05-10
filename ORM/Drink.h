@@ -13,6 +13,7 @@ public:
         cost = 0.f;
         abv = 0.f;
         ibu = 0.f;
+        isActive = true;
     }
 
     bool isValid() { return !drinkId.isEmpty(); }
@@ -23,7 +24,9 @@ public:
     float   abv;          // abv real DEFAULT 0.0, -- Крепость напитка
     float   ibu;          // ibu real DEFAULT 0.0, -- Индекс горечи
     QString description;  // description text, -- Описание напитка
+    bool    isActive;     // boolean DEFAULT true, -- Флаг активности
 
+    static const int fieldCount = 7;
     static const int columnCount = 5;
 
 public:
@@ -39,10 +42,33 @@ public:
         }
     }
 
+    void setData(int position, QVariant value)
+    {
+        switch (position) {
+        case 0:
+            name        = value.toString();
+            break;
+        case 1:
+            cost        = value.toFloat();
+            break;
+        case 2:
+            abv         = value.toFloat();
+            break;
+        case 3:
+            ibu         = value.toFloat();
+            break;
+        case 4:
+            description = value.toString();
+            break;
+        default:
+            break;
+        }
+    }
+
     static QVariant headerData(int position)
     {
         switch (position) {
-        case 0:     return QString("Идентификатор напитка");
+        case 0:     return QString("Наименование напитка");
         case 1:     return QString("Стоимость напитка за 0.5л");
         case 2:     return QString("Крепость напитка");
         case 3:     return QString("Индекс горечи");
@@ -57,7 +83,7 @@ public:
 
         foreach (auto singleData, data)
         {
-            Q_ASSERT(singleData.size() == columnCount + 1);
+            Q_ASSERT(singleData.size() == fieldCount);
 
             Drink drink;
             drink.drinkId     = singleData.value(0).toString();
@@ -66,6 +92,7 @@ public:
             drink.abv         = singleData.value(3).toFloat();
             drink.ibu         = singleData.value(4).toFloat();
             drink.description = singleData.value(5).toString();
+            drink.isActive    = singleData.value(6).toBool();
 
             result.append(drink);
         }

@@ -53,6 +53,12 @@ QString DbAdapter::getUuid()
     return result;
 }
 
+QSqlQuery DbAdapter::getQuery()
+{
+    QSqlQuery result(_db);
+    return result;
+}
+
 bool DbAdapter::getResult(QString query, QList< QList<QVariant> >& data)
 {
     if (!_db.isOpen())
@@ -64,17 +70,32 @@ bool DbAdapter::getResult(QString query, QList< QList<QVariant> >& data)
     return getResult(sqlQuery, data);
 }
 
-bool DbAdapter::getResult(QSqlQuery query, QList<QList<QVariant> > &data)
+bool DbAdapter::getResult(QSqlQuery query, bool execBatch)
+{
+    QList<QList<QVariant> > data;
+
+    return getResult(query, data, execBatch);
+}
+
+bool DbAdapter::getResult(QSqlQuery query, QList<QList<QVariant> > &data, bool execBatch)
 {
     if (!_db.isOpen())
         return false;
     if (!data.isEmpty())
         data.clear();
 
-    if (!query.exec())
+    bool ok;
+    if (execBatch)
+        ok = query.execBatch();
+    else
+        ok = query.exec();
+
+    if (!ok)
     {
-        qDebug() << _db.lastError();
-        qDebug() << query.lastError();
+        QSqlError error = query.lastError();
+        qDebug() << error.databaseText();
+        qDebug() << error.driverText();
+        qDebug() << error.text();
     }
 
     while (query.next())
@@ -90,7 +111,20 @@ bool DbAdapter::getResult(QSqlQuery query, QList<QList<QVariant> > &data)
            data.append(singleResult);
     }
 
-    return !data.isEmpty();
+    return ok;
+}
+
+bool DbAdapter::getResult(QSqlQuery query, QStringList &data, bool execBatch)
+{
+    QList<QList<QVariant> > rawData;
+
+    bool ok = getResult(query, rawData, execBatch);
+
+    foreach (auto subData, rawData)
+        foreach (QVariant singleData, subData)
+            data.append(singleData.toString());
+
+    return ok;
 }
 
 bool DbAdapter::tryLogin(const QString &login, const QString &password)
@@ -99,22 +133,11 @@ bool DbAdapter::tryLogin(const QString &login, const QString &password)
     QSqlQuery query(_db);
 
     query.prepare("SELECT userid FROM sys_user "
-                  "WHERE login = ? "
-                  "AND password = ?;");
+                  "WHERE login = :login "
+                  "AND password = :password;");
 
-    query.addBindValue(login);
-    query.addBindValue(password);
-
-    bool queryResult = getResult(query, data);
-
-    return queryResult && !data.isEmpty();
-}
-
-bool DbAdapter::getDrinks(QList<QList<QVariant> > &data)
-{
-    QSqlQuery query(_db);
-
-    query.prepare("SELECT drinkid, name, cost, abv, ibu, description FROM public.em_drink WHERE isactive = true");
+    query.bindValue(":login", login);
+    query.bindValue(":password", password);
 
     bool queryResult = getResult(query, data);
 

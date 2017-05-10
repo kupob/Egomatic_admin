@@ -39,7 +39,13 @@ HEADERS += \
     Utils/DbAdapter.h \
     Models/DrinksPageModel.h \
     ORM/Drink.h \
-    Forms/DrinkPage.h
+    Forms/DrinkPage.h \
+    ORM/DrinkGateway.h \
+    ORM/Device.h \
+    ORM/Controller.h \
+    ORM/ControllerGateway.h \
+    Forms/ControllerPage.h \
+    Models/ControllerPageModel.h
 
 SOURCES += \
     Forms/ItemPage.cpp \
@@ -49,7 +55,11 @@ SOURCES += \
     Utils/DbAdapter.cpp \
     main.cpp \
     Models/DrinksPageModel.cpp \
-    Forms/DrinkPage.cpp
+    Forms/DrinkPage.cpp \
+    ORM/DrinkGateway.cpp \
+    ORM/ControllerGateway.cpp \
+    Forms/ControllerPage.cpp \
+    Models/ControllerPageModel.cpp
 
 
 

@@ -29,7 +29,6 @@ void LoginDialog::checkAuth()
 
     DbAdapter *db = DbAdapter::instance();
     bool ok = db->tryLogin(userName, passwordEncr);
-//    bool ok = db->getResult(QString("SELECT userid FROM sys_user WHERE login = '%1' AND password = '%2' LIMIT 1;").arg(userName, passwordEncr), data);
 
     if (ok)
     {

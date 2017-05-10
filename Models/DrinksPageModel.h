@@ -15,13 +15,18 @@ public:
     int columnCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+    Qt::ItemFlags flags(const QModelIndex &index) const;
 
     void resetData();
     void addItem(const Drink& drink);
     void removeItem(const QModelIndex& index);
 
+    QList<Drink> getDrinks();
+
 private:
     QList<Drink> _drinks;
+    QList<Drink> _removedDrinks;
 };
 
 #endif // DRINKSPAGEMODEL_H
