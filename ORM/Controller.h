@@ -18,10 +18,11 @@ public:
     QString controllerId; // controllerid uuid NOT NULL, -- Идентификатор напитка
     QString address;      // address inet, -- Адрес контроллера
     QString macAddress;   // macaddress macaddr, -- MAC адрес контроллера
+    int     number;       // integer, -- Номер контроллера
     bool    isActive;     // boolean DEFAULT true, -- Флаг активности
 
-    static const int fieldCount = 4;
-    static const int columnCount = 2;
+    static const int fieldCount = 5;
+    static const int columnCount = 3;
 
 public:
     QVariant data(int position) const
@@ -29,6 +30,7 @@ public:
         switch (position) {
         case 0:     return QVariant::fromValue(address);
         case 1:     return QVariant::fromValue(macAddress);
+        case 2:     return QVariant::fromValue(number);
         default:    return QVariant();
         }
     }
@@ -42,6 +44,9 @@ public:
         case 1:
             macAddress = value.toString();
             break;
+        case 2:
+            number = value.toInt();
+            break;
         default:
             break;
         }
@@ -52,6 +57,7 @@ public:
         switch (position) {
         case 0:     return QString("Адрес контроллера");
         case 1:     return QString("MAC адрес контроллера");
+        case 2:     return QString("Номер контроллера");
         default:    return QVariant();
         }
     }
@@ -68,7 +74,8 @@ public:
             controller.controllerId = singleData.value(0).toString();
             controller.address      = singleData.value(1).toString();
             controller.macAddress   = singleData.value(2).toString();
-            controller.isActive     = singleData.value(3).toBool();
+            controller.number       = singleData.value(3).toInt();
+            controller.isActive     = singleData.value(4).toBool();
 
             result.append(controller);
         }

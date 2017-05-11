@@ -11,6 +11,11 @@ INPUT(
 ./release\ControllerGateway.o
 ./release\ControllerPage.o
 ./release\ControllerPageModel.o
+./release\TubePageModel.o
+./release\TubeGateway.o
+./release\TubePage.o
+./release\DeviceGateway.o
+./release\DevicePage.o
 ./release\moc_ItemPage.o
 ./release\moc_LoginDialog.o
 ./release\moc_MainWindow.o

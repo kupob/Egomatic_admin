@@ -57,7 +57,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="mainPage">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -103,7 +103,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="statsButton">
+         <widget class="QPushButton" name="equipmentButton">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -119,7 +119,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="equipmentButton">
+         <widget class="QPushButton" name="statsButton">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -150,7 +150,27 @@
        </layout>
       </widget>
       <widget class="DrinkPage" name="drinkPage"/>
-      <widget class="QWidget" name="equipmentPage"/>
+      <widget class="QWidget" name="equipmentPage">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="ControllerPage" name="controllerPage">
+           <attribute name="title">
+            <string>Контроллеры оборудования</string>
+           </attribute>
+          </widget>
+          <widget class="TubePage" name="tubePage">
+           <attribute name="title">
+            <string>Трубки</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="statsPage"/>
      </widget>
     </item>
@@ -173,6 +193,18 @@
    <class>DrinkPage</class>
    <extends>QWidget</extends>
    <header>Forms/DrinkPage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ControllerPage</class>
+   <extends>QWidget</extends>
+   <header>Forms/ControllerPage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TubePage</class>
+   <extends>QWidget</extends>
+   <header>Forms/TubePage.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

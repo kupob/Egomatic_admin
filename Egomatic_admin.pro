@@ -45,7 +45,13 @@ HEADERS += \
     ORM/Controller.h \
     ORM/ControllerGateway.h \
     Forms/ControllerPage.h \
-    Models/ControllerPageModel.h
+    Models/ControllerPageModel.h \
+    ORM/Tube.h \
+    Models/TubePageModel.h \
+    ORM/TubeGateway.h \
+    Forms/TubePage.h \
+    ORM/DeviceGateway.h \
+    Forms/DevicePage.h
 
 SOURCES += \
     Forms/ItemPage.cpp \
@@ -59,7 +65,12 @@ SOURCES += \
     ORM/DrinkGateway.cpp \
     ORM/ControllerGateway.cpp \
     Forms/ControllerPage.cpp \
-    Models/ControllerPageModel.cpp
+    Models/ControllerPageModel.cpp \
+    Models/TubePageModel.cpp \
+    ORM/TubeGateway.cpp \
+    Forms/TubePage.cpp \
+    ORM/DeviceGateway.cpp \
+    Forms/DevicePage.cpp
 
 
 

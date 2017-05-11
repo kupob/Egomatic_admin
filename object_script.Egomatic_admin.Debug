@@ -11,6 +11,11 @@ INPUT(
 ./debug\ControllerGateway.o
 ./debug\ControllerPage.o
 ./debug\ControllerPageModel.o
+./debug\TubePageModel.o
+./debug\TubeGateway.o
+./debug\TubePage.o
+./debug\DeviceGateway.o
+./debug\DevicePage.o
 ./debug\moc_ItemPage.o
 ./debug\moc_LoginDialog.o
 ./debug\moc_MainWindow.o
