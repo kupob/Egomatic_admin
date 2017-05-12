@@ -1,15 +1,15 @@
-#ifndef DRINKSPAGEMODEL_H
-#define DRINKSPAGEMODEL_H
+#ifndef DEVICEPAGEMODEL_H
+#define DEVICEPAGEMODEL_H
 
 #include <QObject>
 #include <QAbstractTableModel>
-#include <ORM/Drink.h>
+#include <ORM/Device.h>
 
-class DrinksPageModel : public QAbstractTableModel
+class DevicePageModel : public QAbstractTableModel
 {
 public:
-    DrinksPageModel(QObject *parent = Q_NULLPTR);
-    ~DrinksPageModel();
+    DevicePageModel(QObject *parent = Q_NULLPTR);
+    ~DevicePageModel();
 
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
@@ -19,14 +19,14 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
 
     void resetData();
-    void addItem(const Drink& item);
+    void addItem(const Device& item);
     void removeItem(const QModelIndex& index);
 
-    QList<Drink> getDrinks();
+    QList<Device> getDevices();
 
 private:
-    QList<Drink> _items;
-    QList<Drink> _removedItems;
+    QList<Device> _items;
+    QList<Device> _removedItems;
 };
 
-#endif // DRINKSPAGEMODEL_H
+#endif // DEVICEPAGEMODEL_H

@@ -8,6 +8,7 @@ TubePage::TubePage(QWidget *parent) :
 {
     _model = QPointer<TubePageModel>(new TubePageModel(this));
     ui->tableView->setModel(_model.data());
+    ui->tableView->resizeColumnsToContents();
 }
 
 TubePage::~TubePage()

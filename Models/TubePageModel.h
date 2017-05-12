@@ -19,14 +19,14 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
 
     void resetData();
-    void addItem(const Tube& tube);
+    void addItem(const Tube& item);
     void removeItem(const QModelIndex& index);
 
     QList<Tube> getTubes();
 
 private:
-    QList<Tube> _tubes;
-    QList<Tube> _removedTubes;
+    QList<Tube> _items;
+    QList<Tube> _removedItems;
 };
 
 #endif // TUBEPAGEMODEL_H

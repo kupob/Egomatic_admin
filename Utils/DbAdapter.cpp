@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlDriver>
+#include <QSqlRecord>
 
 DbAdapter* DbAdapter::_pinstance = 0;
 
@@ -102,7 +103,7 @@ bool DbAdapter::getResult(QSqlQuery query, QList<QList<QVariant> > &data, bool e
     {
        int i = 0;
        QList<QVariant> singleResult;
-       while (query.value(i).isValid())
+       while (i < query.record().count())
        {
            singleResult.append(query.value(i));
            i++;

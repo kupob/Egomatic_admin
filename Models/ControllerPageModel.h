@@ -19,14 +19,14 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
 
     void resetData();
-    void addItem(const Controller& controller);
+    void addItem(const Controller& item);
     void removeItem(const QModelIndex& index);
 
     QList<Controller> getControllers();
 
 private:
-    QList<Controller> _controllers;
-    QList<Controller> _removedControllers;
+    QList<Controller> _items;
+    QList<Controller> _removedItems;
 };
 
 #endif // CONTROLLERPAGEMODEL_H

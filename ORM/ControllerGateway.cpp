@@ -72,24 +72,26 @@ bool ControllerGateway::saveControllers(QList<Controller> data)
         }
     }
 
-    insertQuery.bindValue(":controllerid", insert_controllerIds );
-    insertQuery.bindValue(":address",      insert_addresses     );
-    insertQuery.bindValue(":macaddress",   insert_macaddresses  );
-    insertQuery.bindValue(":number",       insert_numbers       );
-    insertQuery.bindValue(":isactive",     insert_isActives     );
-
-    updateQuery.bindValue(":controllerid", update_controllerIds );
-    updateQuery.bindValue(":address",      update_addresses     );
-    updateQuery.bindValue(":macaddress",   update_macaddresses  );
-    insertQuery.bindValue(":number",       update_numbers       );
-    updateQuery.bindValue(":isactive",     update_isActives     );
-
     bool queryResult = true;
     if (!update_controllerIds.isEmpty())
-        queryResult = _db->getResult(updateQuery, true);
-    if (queryResult && !insert_controllerIds.isEmpty())
     {
-        queryResult = _db->getResult(insertQuery, true);
+        updateQuery.bindValue(":controllerid", update_controllerIds );
+        updateQuery.bindValue(":address",      update_addresses     );
+        updateQuery.bindValue(":macaddress",   update_macaddresses  );
+        updateQuery.bindValue(":number",       update_numbers       );
+        updateQuery.bindValue(":isactive",     update_isActives     );
+
+        queryResult &= _db->getResult(updateQuery, true);
+    }
+    if (!insert_controllerIds.isEmpty())
+    {
+        insertQuery.bindValue(":controllerid", insert_controllerIds );
+        insertQuery.bindValue(":address",      insert_addresses     );
+        insertQuery.bindValue(":macaddress",   insert_macaddresses  );
+        insertQuery.bindValue(":number",       insert_numbers       );
+        insertQuery.bindValue(":isactive",     insert_isActives     );
+
+        queryResult &= _db->getResult(insertQuery, true);
     }
 
     return queryResult;

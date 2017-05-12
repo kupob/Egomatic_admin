@@ -15,7 +15,7 @@ TubePageModel::~TubePageModel()
 int TubePageModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return _tubes.count();
+    return _items.count();
 }
 
 int TubePageModel::columnCount(const QModelIndex &parent) const
@@ -26,12 +26,12 @@ int TubePageModel::columnCount(const QModelIndex &parent) const
 
 QVariant TubePageModel::data(const QModelIndex &index, int role) const
 {
-    Tube tube = _tubes.value(index.row());
+    Tube item = _items.value(index.row());
     if (role == Qt::DisplayRole)
     {
-        if (tube.isValid())
+        if (item.isValid())
         {
-            return tube.data(index.column());
+            return item.data(index.column());
         }
     }
 
@@ -55,9 +55,9 @@ bool TubePageModel::setData(const QModelIndex &index, const QVariant &value, int
 {
     Q_UNUSED(role);
 
-    Tube tube = _tubes.value(index.row());
-    tube.setData(index.column(), value);
-    _tubes[index.row()] = tube;
+    Tube item = _items.value(index.row());
+    item.setData(index.column(), value);
+    _items[index.row()] = item;
 
     emit dataChanged(index, index);
 
@@ -77,22 +77,22 @@ void TubePageModel::resetData()
 {
     beginResetModel();
 
-    _tubes.clear();
-    _removedTubes.clear();
+    _items.clear();
+    _removedItems.clear();
 
-    TubeGateway tubeGateway;
-    tubeGateway.getTubes(_tubes);
+    TubeGateway itemGateway;
+    itemGateway.getTubes(_items);
 
     endResetModel();
 
 }
 
-void TubePageModel::addItem(const Tube &tube)
+void TubePageModel::addItem(const Tube &item)
 {
-    beginInsertRows(QModelIndex(), _tubes.count(), _tubes.count());
+    beginInsertRows(QModelIndex(), _items.count(), _items.count());
 
-    _tubes.append(tube);
-    _tubes.last().number = _tubes.count();
+    _items.append(item);
+    _items.last().number = _items.count();
 
     endInsertRows();
 }
@@ -101,16 +101,16 @@ void TubePageModel::removeItem(const QModelIndex &index)
 {
     beginRemoveRows(QModelIndex(), index.row(), index.row());
 
-    Tube tube = _tubes.takeAt(index.row());
-    tube.isActive = false;
-    _removedTubes.append(tube);
+    Tube item = _items.takeAt(index.row());
+    item.isActive = false;
+    _removedItems.append(item);
 
     endRemoveRows();
 }
 
 QList<Tube> TubePageModel::getTubes()
 {
-    QList<Tube> result = _tubes;
-    result += _removedTubes;
+    QList<Tube> result = _items;
+    result += _removedItems;
     return result;
 }

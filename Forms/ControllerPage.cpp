@@ -8,6 +8,7 @@ ControllerPage::ControllerPage(QWidget *parent) :
 {
     _model = QPointer<ControllerPageModel>(new ControllerPageModel(this));
     ui->tableView->setModel(_model.data());
+    ui->tableView->resizeColumnsToContents();
 }
 
 ControllerPage::~ControllerPage()

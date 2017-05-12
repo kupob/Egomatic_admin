@@ -15,7 +15,7 @@ ControllerPageModel::~ControllerPageModel()
 int ControllerPageModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return _controllers.count();
+    return _items.count();
 }
 
 int ControllerPageModel::columnCount(const QModelIndex &parent) const
@@ -26,12 +26,12 @@ int ControllerPageModel::columnCount(const QModelIndex &parent) const
 
 QVariant ControllerPageModel::data(const QModelIndex &index, int role) const
 {
-    Controller controller = _controllers.value(index.row());
+    Controller item = _items.value(index.row());
     if (role == Qt::DisplayRole)
     {
-        if (controller.isValid())
+        if (item.isValid())
         {
-            return controller.data(index.column());
+            return item.data(index.column());
         }
     }
 
@@ -55,9 +55,9 @@ bool ControllerPageModel::setData(const QModelIndex &index, const QVariant &valu
 {
     Q_UNUSED(role);
 
-    Controller controller = _controllers.value(index.row());
-    controller.setData(index.column(), value);
-    _controllers[index.row()] = controller;
+    Controller item = _items.value(index.row());
+    item.setData(index.column(), value);
+    _items[index.row()] = item;
 
     emit dataChanged(index, index);
 
@@ -77,21 +77,21 @@ void ControllerPageModel::resetData()
 {
     beginResetModel();
 
-    _controllers.clear();
-    _removedControllers.clear();
+    _items.clear();
+    _removedItems.clear();
 
-    ControllerGateway controllerGateway;
-    controllerGateway.getControllers(_controllers);
+    ControllerGateway itemGateway;
+    itemGateway.getControllers(_items);
 
     endResetModel();
 
 }
 
-void ControllerPageModel::addItem(const Controller &controller)
+void ControllerPageModel::addItem(const Controller &item)
 {
-    beginInsertRows(QModelIndex(), _controllers.count(), _controllers.count());
+    beginInsertRows(QModelIndex(), _items.count(), _items.count());
 
-    _controllers.append(controller);
+    _items.append(item);
 
     endInsertRows();
 }
@@ -100,16 +100,16 @@ void ControllerPageModel::removeItem(const QModelIndex &index)
 {
     beginRemoveRows(QModelIndex(), index.row(), index.row());
 
-    Controller controller = _controllers.takeAt(index.row());
-    controller.isActive = false;
-    _removedControllers.append(controller);
+    Controller item = _items.takeAt(index.row());
+    item.isActive = false;
+    _removedItems.append(item);
 
     endRemoveRows();
 }
 
 QList<Controller> ControllerPageModel::getControllers()
 {
-    QList<Controller> result = _controllers;
-    result += _removedControllers;
+    QList<Controller> result = _items;
+    result += _removedItems;
     return result;
 }

@@ -12,6 +12,8 @@ public:
     {
         pinNumber = 0;
         deviceType = -1;
+        controllerNumber = 0;
+        tubeNumber = 0;
         isActive = true;
     }
 
@@ -31,11 +33,10 @@ public:
     QVariant data(int position) const
     {
         switch (position) {
-        case 0:     return QVariant::fromValue(deviceId);
-        case 1:     return QVariant::fromValue(pinNumber);
-        case 2:     return QVariant::fromValue(deviceType);
-        case 3:     return QVariant::fromValue(controllerNumber);
-        case 4:     return QVariant::fromValue(tubeNumber);
+        case 0:     return QVariant::fromValue(pinNumber);
+        case 1:     return QVariant::fromValue(deviceType);
+        case 2:     return QVariant::fromValue(controllerNumber);
+        case 3:     return QVariant::fromValue(tubeNumber);
         default:    return QVariant();
         }
     }
@@ -44,18 +45,15 @@ public:
     {
         switch (position) {
         case 0:
-            deviceId = value.toString();
-            break;
-        case 1:
             pinNumber    = value.toInt();
             break;
-        case 2:
+        case 1:
             deviceType   = value.toInt();
             break;
-        case 3:
+        case 2:
             controllerNumber = value.toInt();
             break;
-        case 4:
+        case 3:
             tubeNumber = value.toInt();
             break;
         default:
@@ -66,11 +64,10 @@ public:
     static QVariant headerData(int position)
     {
         switch (position) {
-        case 0:     return QString("Контроллер");
-        case 1:     return QString("Номер пина на контроллере");
-        case 2:     return QString("Тип устройства");
-        case 3:     return QString("Номер контроллера");
-        case 4:     return QString("Номер трубки");
+        case 0:     return QString("Номер пина на контроллере");
+        case 1:     return QString("Тип устройства");
+        case 2:     return QString("Номер контроллера");
+        case 3:     return QString("Номер трубки");
         default:    return QVariant();
         }
     }

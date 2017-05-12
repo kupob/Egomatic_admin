@@ -79,26 +79,28 @@ bool DeviceGateway::saveDevices(QList<Device> data)
         }
     }
 
-    insertQuery.bindValue(":deviceid",         insert_deviceId         );
-    insertQuery.bindValue(":pinnumber",        insert_pinNumber        );
-    insertQuery.bindValue(":devicetype",       insert_deviceType       );
-    insertQuery.bindValue(":controllernumber", insert_controllerNumber );
-    insertQuery.bindValue(":tubenumber",       insert_tubeNumber       );
-    insertQuery.bindValue(":isactive",         insert_isActive         );
-
-    insertQuery.bindValue(":deviceid",         update_deviceId         );
-    insertQuery.bindValue(":pinnumber",        update_pinNumber        );
-    insertQuery.bindValue(":devicetype",       update_deviceType       );
-    insertQuery.bindValue(":controllernumber", update_controllerNumber );
-    insertQuery.bindValue(":tubenumber",       update_tubeNumber       );
-    insertQuery.bindValue(":isactive",         update_isActive         );
-
     bool queryResult = true;
     if (!update_deviceId.isEmpty())
-        queryResult = _db->getResult(updateQuery, true);
-    if (queryResult && !insert_deviceId.isEmpty())
     {
-        queryResult = _db->getResult(insertQuery, true);
+        updateQuery.bindValue(":deviceid",         update_deviceId         );
+        updateQuery.bindValue(":pinnumber",        update_pinNumber        );
+        updateQuery.bindValue(":devicetype",       update_deviceType       );
+        updateQuery.bindValue(":controllernumber", update_controllerNumber );
+        updateQuery.bindValue(":tubenumber",       update_tubeNumber       );
+        updateQuery.bindValue(":isactive",         update_isActive         );
+
+        queryResult &= _db->getResult(updateQuery, true);
+    }
+    if (!insert_deviceId.isEmpty())
+    {
+        insertQuery.bindValue(":deviceid",         insert_deviceId         );
+        insertQuery.bindValue(":pinnumber",        insert_pinNumber        );
+        insertQuery.bindValue(":devicetype",       insert_deviceType       );
+        insertQuery.bindValue(":controllernumber", insert_controllerNumber );
+        insertQuery.bindValue(":tubenumber",       insert_tubeNumber       );
+        insertQuery.bindValue(":isactive",         insert_isActive         );
+
+        queryResult &= _db->getResult(insertQuery, true);
     }
 
     return queryResult;

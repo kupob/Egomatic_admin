@@ -1,32 +1,32 @@
-#include "DrinksPageModel.h"
-#include <ORM/DrinkGateway.h>
+#include "DevicePageModel.h"
+#include <ORM/DeviceGateway.h>
 
-DrinksPageModel::DrinksPageModel(QObject *parent)
+DevicePageModel::DevicePageModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
     resetData();
 }
 
-DrinksPageModel::~DrinksPageModel()
+DevicePageModel::~DevicePageModel()
 {
 
 }
 
-int DrinksPageModel::rowCount(const QModelIndex &parent) const
+int DevicePageModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return _items.count();
 }
 
-int DrinksPageModel::columnCount(const QModelIndex &parent) const
+int DevicePageModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return Drink::columnCount;
+    return Device::columnCount;
 }
 
-QVariant DrinksPageModel::data(const QModelIndex &index, int role) const
+QVariant DevicePageModel::data(const QModelIndex &index, int role) const
 {
-    Drink item = _items.value(index.row());
+    Device item = _items.value(index.row());
     if (role == Qt::DisplayRole)
     {
         if (item.isValid())
@@ -38,24 +38,24 @@ QVariant DrinksPageModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QVariant DrinksPageModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant DevicePageModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Vertical)
         return QVariant();
 
     if (role == Qt::DisplayRole)
     {
-        return Drink::headerData(section);
+        return Device::headerData(section);
     }
 
     return QVariant();
 }
 
-bool DrinksPageModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool DevicePageModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     Q_UNUSED(role);
 
-    Drink item = _items.value(index.row());
+    Device item = _items.value(index.row());
     item.setData(index.column(), value);
     _items[index.row()] = item;
 
@@ -64,7 +64,7 @@ bool DrinksPageModel::setData(const QModelIndex &index, const QVariant &value, i
     return true;
 }
 
-Qt::ItemFlags DrinksPageModel::flags(const QModelIndex &index) const
+Qt::ItemFlags DevicePageModel::flags(const QModelIndex &index) const
 {
     Q_UNUSED(index);
 
@@ -73,21 +73,21 @@ Qt::ItemFlags DrinksPageModel::flags(const QModelIndex &index) const
     return flags;
 }
 
-void DrinksPageModel::resetData()
+void DevicePageModel::resetData()
 {
     beginResetModel();
 
     _items.clear();
     _removedItems.clear();
 
-    DrinkGateway itemGateway;
-    itemGateway.getDrinks(_items);
+    DeviceGateway itemGateway;
+    itemGateway.getDevices(_items);
 
     endResetModel();
 
 }
 
-void DrinksPageModel::addItem(const Drink &item)
+void DevicePageModel::addItem(const Device &item)
 {
     beginInsertRows(QModelIndex(), _items.count(), _items.count());
 
@@ -96,20 +96,20 @@ void DrinksPageModel::addItem(const Drink &item)
     endInsertRows();
 }
 
-void DrinksPageModel::removeItem(const QModelIndex &index)
+void DevicePageModel::removeItem(const QModelIndex &index)
 {
     beginRemoveRows(QModelIndex(), index.row(), index.row());
 
-    Drink item = _items.takeAt(index.row());
+    Device item = _items.takeAt(index.row());
     item.isActive = false;
     _removedItems.append(item);
 
     endRemoveRows();
 }
 
-QList<Drink> DrinksPageModel::getDrinks()
+QList<Device> DevicePageModel::getDevices()
 {
-    QList<Drink> result = _items;
+    QList<Device> result = _items;
     result += _removedItems;
     return result;
 }

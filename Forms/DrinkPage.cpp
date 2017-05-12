@@ -8,6 +8,7 @@ DrinkPage::DrinkPage(QWidget *parent) :
 {
     _model = QPointer<DrinksPageModel>(new DrinksPageModel(this));
     ui->tableView->setModel(_model.data());
+    ui->tableView->resizeColumnsToContents();
 }
 
 DrinkPage::~DrinkPage()

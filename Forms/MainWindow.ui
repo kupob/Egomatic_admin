@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>622</width>
+    <height>381</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -155,7 +155,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <widget class="ControllerPage" name="controllerPage">
            <attribute name="title">
@@ -165,6 +165,11 @@
           <widget class="TubePage" name="tubePage">
            <attribute name="title">
             <string>Трубки</string>
+           </attribute>
+          </widget>
+          <widget class="DevicePage" name="devicePage">
+           <attribute name="title">
+            <string>Устройства</string>
            </attribute>
           </widget>
          </widget>
@@ -181,7 +186,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>622</width>
      <height>21</height>
     </rect>
    </property>
@@ -205,6 +210,12 @@
    <class>TubePage</class>
    <extends>QWidget</extends>
    <header>Forms/TubePage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DevicePage</class>
+   <extends>QWidget</extends>
+   <header>Forms/DevicePage.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

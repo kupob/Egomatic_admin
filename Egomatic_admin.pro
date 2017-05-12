@@ -51,7 +51,8 @@ HEADERS += \
     ORM/TubeGateway.h \
     Forms/TubePage.h \
     ORM/DeviceGateway.h \
-    Forms/DevicePage.h
+    Forms/DevicePage.h \
+    Models/DevicePageModel.h
 
 SOURCES += \
     Forms/ItemPage.cpp \
@@ -70,7 +71,8 @@ SOURCES += \
     ORM/TubeGateway.cpp \
     Forms/TubePage.cpp \
     ORM/DeviceGateway.cpp \
-    Forms/DevicePage.cpp
+    Forms/DevicePage.cpp \
+    Models/DevicePageModel.cpp
 
 
 

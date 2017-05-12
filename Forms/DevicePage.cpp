@@ -8,6 +8,7 @@ DevicePage::DevicePage(QWidget *parent) :
 {
     _model = QPointer<DevicePageModel>(new DevicePageModel(this));
     ui->tableView->setModel(_model.data());
+    ui->tableView->resizeColumnsToContents();
 }
 
 DevicePage::~DevicePage()
