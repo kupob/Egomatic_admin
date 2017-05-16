@@ -11,8 +11,8 @@ class DrinkGateway
 public:
     DrinkGateway();
 
-    bool getDrinks(QList<Drink> &data);
-    bool saveDrinks(QList<Drink> data);
+    bool getItems(QList<Drink> &data);
+    bool saveItems(QList<Drink> data);
 
 private:
     DbAdapter* _db;

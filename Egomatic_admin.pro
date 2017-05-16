@@ -52,7 +52,12 @@ HEADERS += \
     Forms/TubePage.h \
     ORM/DeviceGateway.h \
     Forms/DevicePage.h \
-    Models/DevicePageModel.h
+    Models/DevicePageModel.h \
+    Forms/TubeSettingsPage.h \
+    Models/TubeSettingsPageModel.h \
+    ORM/TubeSettings.h \
+    ORM/TubeSettingsGateway.h \
+    Models/DrinkComboboxDelegate.h
 
 SOURCES += \
     Forms/ItemPage.cpp \
@@ -72,7 +77,11 @@ SOURCES += \
     Forms/TubePage.cpp \
     ORM/DeviceGateway.cpp \
     Forms/DevicePage.cpp \
-    Models/DevicePageModel.cpp
+    Models/DevicePageModel.cpp \
+    Forms/TubeSettingsPage.cpp \
+    Models/TubeSettingsPageModel.cpp \
+    ORM/TubeSettingsGateway.cpp \
+    Models/DrinkComboboxDelegate.cpp
 
 
 

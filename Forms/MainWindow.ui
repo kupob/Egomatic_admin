@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainMenu</string>
+   <string>Система самообслуживания</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -57,7 +57,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="mainPage">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -119,6 +119,22 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="tubeButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Управление трубками</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">buttonGroup</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="statsButton">
           <property name="minimumSize">
            <size>
@@ -155,7 +171,7 @@
         <item>
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>2</number>
+           <number>1</number>
           </property>
           <widget class="ControllerPage" name="controllerPage">
            <attribute name="title">
@@ -176,6 +192,7 @@
         </item>
        </layout>
       </widget>
+      <widget class="TubeSettingsPage" name="tubeSettingsPage"/>
       <widget class="QWidget" name="statsPage"/>
      </widget>
     </item>
@@ -216,6 +233,12 @@
    <class>DevicePage</class>
    <extends>QWidget</extends>
    <header>Forms/DevicePage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TubeSettingsPage</class>
+   <extends>QWidget</extends>
+   <header>Forms/TubeSettingsPage.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

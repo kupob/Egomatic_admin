@@ -7,7 +7,7 @@ DrinkGateway::DrinkGateway()
     _db = DbAdapter::instance();
 }
 
-bool DrinkGateway::getDrinks(QList<Drink> &data)
+bool DrinkGateway::getItems(QList<Drink> &data)
 {
     QSqlQuery query = _db->getQuery();
 
@@ -20,7 +20,7 @@ bool DrinkGateway::getDrinks(QList<Drink> &data)
     return queryResult && !data.isEmpty();
 }
 
-bool DrinkGateway::saveDrinks(QList<Drink> data)
+bool DrinkGateway::saveItems(QList<Drink> data)
 {
     QSqlQuery selectQuery = _db->getQuery();
     QSqlQuery insertQuery = _db->getQuery();

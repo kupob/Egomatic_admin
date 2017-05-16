@@ -81,7 +81,7 @@ void DrinksPageModel::resetData()
     _removedItems.clear();
 
     DrinkGateway itemGateway;
-    itemGateway.getDrinks(_items);
+    itemGateway.getItems(_items);
 
     endResetModel();
 
@@ -107,7 +107,7 @@ void DrinksPageModel::removeItem(const QModelIndex &index)
     endRemoveRows();
 }
 
-QList<Drink> DrinksPageModel::getDrinks()
+QList<Drink> DrinksPageModel::getItems()
 {
     QList<Drink> result = _items;
     result += _removedItems;

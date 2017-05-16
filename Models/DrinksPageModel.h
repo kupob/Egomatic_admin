@@ -22,7 +22,7 @@ public:
     void addItem(const Drink& item);
     void removeItem(const QModelIndex& index);
 
-    QList<Drink> getDrinks();
+    QList<Drink> getItems();
 
 private:
     QList<Drink> _items;
