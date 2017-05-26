@@ -27,7 +27,7 @@ int DrinksPageModel::columnCount(const QModelIndex &parent) const
 QVariant DrinksPageModel::data(const QModelIndex &index, int role) const
 {
     Drink item = _items.value(index.row());
-    if (role == Qt::DisplayRole)
+    if (role == Qt::DisplayRole || role == Qt::EditRole)
     {
         if (item.isValid())
         {

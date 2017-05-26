@@ -11,7 +11,7 @@ bool DrinkGateway::getItems(QList<Drink> &data)
 {
     QSqlQuery query = _db->getQuery();
 
-    query.prepare("SELECT drinkid, name, cost, abv, ibu, description, isactive FROM public.em_drink WHERE isactive = true");
+    query.prepare("SELECT drinkid, name, cost, costvolume, abv, ibu, description, isactive FROM public.em_drink WHERE isactive = true");
 
     QList<QList<QVariant> > rawData;
     bool queryResult = _db->getResult(query, rawData);
@@ -31,17 +31,18 @@ bool DrinkGateway::saveItems(QList<Drink> data)
     bool result = _db->getResult(selectQuery, existsIdList);
 
     insertQuery.prepare(" INSERT INTO em_drink("
-                  " drinkid, name, cost, abv, ibu, description, isactive)"
-                  " VALUES (:drinkid, :name, :cost, :abv, :ibu, :description, :isactive)"
+                  " drinkid, name, cost, costvolume, abv, ibu, description, isactive)"
+                  " VALUES (:drinkid, :name, :cost, :costvolume, :abv, :ibu, :description, :isactive)"
                   " ON CONFLICT (drinkid) DO NOTHING ;");
 
     updateQuery.prepare(" UPDATE em_drink"
-                        " SET name=:name, cost=:cost, abv=:abv, ibu=:ibu, description=:description, isactive=:isactive "
+                        " SET name=:name, cost=:cost, costvolume=:costvolume, abv=:abv, ibu=:ibu, description=:description, isactive=:isactive "
                         " WHERE drinkid=:drinkid;");
 
     QVariantList insert_drinkIds,
                  insert_names,
                  insert_costs,
+                 insert_costVolumes,
                  insert_abvs,
                  insert_ibus,
                  insert_descriptions,
@@ -50,6 +51,7 @@ bool DrinkGateway::saveItems(QList<Drink> data)
     QVariantList update_drinkIds,
                  update_names,
                  update_costs,
+                 update_costVolumes,
                  update_abvs,
                  update_ibus,
                  update_descriptions,
@@ -63,6 +65,7 @@ bool DrinkGateway::saveItems(QList<Drink> data)
             insert_drinkIds     .append ( drink.drinkId     );
             insert_names        .append ( drink.name        );
             insert_costs        .append ( drink.cost        );
+            insert_costVolumes  .append ( drink.costVolume  );
             insert_abvs         .append ( drink.abv         );
             insert_ibus         .append ( drink.ibu         );
             insert_descriptions .append ( drink.description );
@@ -73,6 +76,7 @@ bool DrinkGateway::saveItems(QList<Drink> data)
             update_drinkIds     .append ( drink.drinkId     );
             update_names        .append ( drink.name        );
             update_costs        .append ( drink.cost        );
+            update_costVolumes  .append ( drink.costVolume  );
             update_abvs         .append ( drink.abv         );
             update_ibus         .append ( drink.ibu         );
             update_descriptions .append ( drink.description );
@@ -83,6 +87,7 @@ bool DrinkGateway::saveItems(QList<Drink> data)
     insertQuery.bindValue(":drinkid",     insert_drinkIds    );
     insertQuery.bindValue(":name",        insert_names       );
     insertQuery.bindValue(":cost",        insert_costs       );
+    insertQuery.bindValue(":costvolume",  insert_costVolumes );
     insertQuery.bindValue(":abv",         insert_abvs        );
     insertQuery.bindValue(":ibu",         insert_ibus        );
     insertQuery.bindValue(":description", insert_descriptions);
@@ -91,6 +96,7 @@ bool DrinkGateway::saveItems(QList<Drink> data)
     updateQuery.bindValue(":drinkid",     update_drinkIds    );
     updateQuery.bindValue(":name",        update_names       );
     updateQuery.bindValue(":cost",        update_costs       );
+    updateQuery.bindValue(":costvolume",  update_costVolumes );
     updateQuery.bindValue(":abv",         update_abvs        );
     updateQuery.bindValue(":ibu",         update_ibus        );
     updateQuery.bindValue(":description", update_descriptions);

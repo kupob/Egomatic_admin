@@ -20,14 +20,15 @@ public:
 
     QString drinkId;      // drinkid uuid NOT NULL, -- Идентификатор напитка
     QString name;         // name character varying(256), -- Наименование напитка
-    float   cost;         // cost real DEFAULT 0.0, -- Стоимость напитка за 0.5л
+    float   cost;         // cost real DEFAULT 0.0, -- Стоимость напитка
+    float   costVolume;   // cost real DEFAULT 0.0, -- Объем напитка, для которого указана стоимость
     float   abv;          // abv real DEFAULT 0.0, -- Крепость напитка
     float   ibu;          // ibu real DEFAULT 0.0, -- Индекс горечи
     QString description;  // description text, -- Описание напитка
     bool    isActive;     // boolean DEFAULT true, -- Флаг активности
 
-    static const int fieldCount = 7;
-    static const int columnCount = 5;
+    static const int fieldCount = 8;
+    static const int columnCount = 6;
 
 public:
     QVariant data(int position) const
@@ -35,9 +36,10 @@ public:
         switch (position) {
         case 0:     return QVariant::fromValue(name);
         case 1:     return QVariant::fromValue(cost);
-        case 2:     return QVariant::fromValue(abv);
-        case 3:     return QVariant::fromValue(ibu);
-        case 4:     return QVariant::fromValue(description);
+        case 2:     return QVariant::fromValue(costVolume);
+        case 3:     return QVariant::fromValue(abv);
+        case 4:     return QVariant::fromValue(ibu);
+        case 5:     return QVariant::fromValue(description);
         default:    return QVariant();
         }
     }
@@ -52,12 +54,15 @@ public:
             cost        = value.toFloat();
             break;
         case 2:
-            abv         = value.toFloat();
+            costVolume  = value.toFloat();
             break;
         case 3:
-            ibu         = value.toFloat();
+            abv         = value.toFloat();
             break;
         case 4:
+            ibu         = value.toFloat();
+            break;
+        case 5:
             description = value.toString();
             break;
         default:
@@ -69,10 +74,11 @@ public:
     {
         switch (position) {
         case 0:     return QString("Наименование напитка");
-        case 1:     return QString("Стоимость напитка за 0.5л");
-        case 2:     return QString("Крепость напитка");
-        case 3:     return QString("Индекс горечи");
-        case 4:     return QString("Описание напитка");
+        case 1:     return QString("Цена напитка");
+        case 2:     return QString("Объем напитка за указанную цену");
+        case 3:     return QString("Крепость напитка");
+        case 4:     return QString("Индекс горечи");
+        case 5:     return QString("Описание напитка");
         default:    return QVariant();
         }
     }
@@ -89,10 +95,11 @@ public:
             drink.drinkId     = singleData.value(0).toString();
             drink.name        = singleData.value(1).toString();
             drink.cost        = singleData.value(2).toFloat();
-            drink.abv         = singleData.value(3).toFloat();
-            drink.ibu         = singleData.value(4).toFloat();
-            drink.description = singleData.value(5).toString();
-            drink.isActive    = singleData.value(6).toBool();
+            drink.costVolume  = singleData.value(3).toFloat();
+            drink.abv         = singleData.value(4).toFloat();
+            drink.ibu         = singleData.value(5).toFloat();
+            drink.description = singleData.value(6).toString();
+            drink.isActive    = singleData.value(7).toBool();
 
             result.append(drink);
         }

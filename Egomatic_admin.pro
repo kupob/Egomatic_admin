@@ -57,7 +57,9 @@ HEADERS += \
     Models/TubeSettingsPageModel.h \
     ORM/TubeSettings.h \
     ORM/TubeSettingsGateway.h \
-    Models/DrinkComboboxDelegate.h
+    Models/DrinkComboboxDelegate.h \
+    ORM/FlowHistory.h \
+    ORM/FlowHistoryGateway.h
 
 SOURCES += \
     Forms/ItemPage.cpp \
@@ -81,7 +83,8 @@ SOURCES += \
     Forms/TubeSettingsPage.cpp \
     Models/TubeSettingsPageModel.cpp \
     ORM/TubeSettingsGateway.cpp \
-    Models/DrinkComboboxDelegate.cpp
+    Models/DrinkComboboxDelegate.cpp \
+    ORM/FlowHistoryGateway.cpp
 
 
 
