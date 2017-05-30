@@ -15,10 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->buttonGroup->setId(ui->backButton, 0);
     ui->buttonGroup->setId(ui->drinksButton, 1);
     ui->buttonGroup->setId(ui->equipmentButton, 2);
-    ui->buttonGroup->setId(ui->tubeButton, 3);
-    ui->buttonGroup->setId(ui->statsButton, 4);
-
-    ui->statsButton->setEnabled(false);
+    ui->buttonGroup->setId(ui->statsButton, 3);
 
     connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), ui->stackedWidget, SLOT(setCurrentIndex(int)));
     connect(ui->buttonGroup, SIGNAL(buttonClicked(int)), this, SLOT(setHeader()));

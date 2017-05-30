@@ -2,7 +2,6 @@
 #include "ui_ItemPage.h"
 #include <Utils/DbAdapter.h>
 #include <ORM/TubeSettingsGateway.h>
-#include <ORM/DrinkGateway.h>
 #include <Models/DrinkComboboxDelegate.h>
 
 TubeSettingsPage::TubeSettingsPage(QWidget *parent) :

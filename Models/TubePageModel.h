@@ -5,6 +5,8 @@
 #include <QAbstractTableModel>
 #include <ORM/Tube.h>
 
+class Drink;
+
 class TubePageModel : public QAbstractTableModel
 {
 public:
@@ -22,11 +24,12 @@ public:
     void addItem(const Tube& item);
     void removeItem(const QModelIndex& index);
 
-    QList<Tube> getTubes();
+    QList<Tube> getItems();
 
 private:
     QList<Tube> _items;
     QList<Tube> _removedItems;
+    QHash<QString, Drink> _drinks;
 };
 
 #endif // TUBEPAGEMODEL_H

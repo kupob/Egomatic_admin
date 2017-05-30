@@ -2,6 +2,7 @@
 #include "ui_ItemPage.h"
 #include <Utils/DbAdapter.h>
 #include <ORM/DeviceGateway.h>
+#include <Models/DeviceTypeDelegate.h>
 
 DevicePage::DevicePage(QWidget *parent) :
     ItemPage(parent)
@@ -9,6 +10,9 @@ DevicePage::DevicePage(QWidget *parent) :
     _model = QPointer<DevicePageModel>(new DevicePageModel(this));
     ui->tableView->setModel(_model.data());
     ui->tableView->resizeColumnsToContents();
+
+    DeviceTypeDelegate* delegate = new DeviceTypeDelegate(this);
+    ui->tableView->setItemDelegateForColumn(1, delegate);
 }
 
 DevicePage::~DevicePage()

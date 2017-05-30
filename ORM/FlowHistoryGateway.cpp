@@ -11,7 +11,8 @@ bool FlowHistoryGateway::getItems(QList<FlowHistory> &data)
 {
     QSqlQuery query = _db->getQuery();
 
-    query.prepare("SELECT flowhistoryid, flowtime, drinkid, amount, customerid, isactive FROM public.stat_flowhistory WHERE isactive = true");
+    query.prepare("SELECT flowhistoryid, flowtime, drinkid, amount, spent, customerid, isactive "
+                  "FROM public.stat_flowhistory WHERE isactive = true; ");
 
     QList<QList<QVariant> > rawData;
     bool queryResult = _db->getResult(query, rawData);

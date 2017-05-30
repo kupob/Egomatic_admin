@@ -31,9 +31,20 @@ QVariant DevicePageModel::data(const QModelIndex &index, int role) const
     {
         if (item.isValid())
         {
-            return item.data(index.column());
+            if (index.column() == 1)
+            {
+                int deviceType = item.data(1).toInt();
+                if (deviceType == 0)
+                    return "Расходомер";
+                else if (deviceType == 1)
+                    return "Клапан";
+            }
+            else
+                return item.data(index.column());
         }
     }
+    else if (role == Qt::EditRole && index.column() == 1)
+        return item.data(1);
 
     return QVariant();
 }

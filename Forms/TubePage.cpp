@@ -2,6 +2,7 @@
 #include "ui_ItemPage.h"
 #include <Utils/DbAdapter.h>
 #include <ORM/TubeGateway.h>
+#include <Models/DrinkComboboxDelegate.h>
 
 TubePage::TubePage(QWidget *parent) :
     ItemPage(parent)
@@ -9,6 +10,9 @@ TubePage::TubePage(QWidget *parent) :
     _model = QPointer<TubePageModel>(new TubePageModel(this));
     ui->tableView->setModel(_model.data());
     ui->tableView->resizeColumnsToContents();
+
+    DrinkComboboxDelegate* delegate = new DrinkComboboxDelegate(this);
+    ui->tableView->setItemDelegateForColumn(1, delegate);
 }
 
 TubePage::~TubePage()
@@ -31,12 +35,20 @@ void TubePage::removeItem()
 
 void TubePage::save()
 {
-    QList<Tube> tubes = _model->getTubes();
-    TubeGateway tubeGateway;
+    QList<Tube> items = _model->getItems();
+    TubeGateway gateway;
 
     bool ok = false;
-    if (!tubes.isEmpty())
-        ok = tubeGateway.saveTubes(tubes);
+    if (!items.isEmpty())
+    {
+        for (int i = 0; i < items.count(); i++)
+        {
+            if (items.at(i).tubeSettingsId.isEmpty())
+                items[i].tubeSettingsId = DbAdapter::instance()->getUuid();
+        }
+
+        ok = gateway.saveItems(items);
+    }
 
     if (ok)
         _model->resetData();

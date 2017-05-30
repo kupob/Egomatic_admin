@@ -22,6 +22,10 @@ INPUT(
 ./release\TubeSettingsGateway.o
 ./release\DrinkComboboxDelegate.o
 ./release\FlowHistoryGateway.o
+./release\FlowHistoryPage.o
+./release\FlowHistoryPageModel.o
+./release\CustomerGateway.o
+./release\DeviceTypeDelegate.o
 ./release\moc_ItemPage.o
 ./release\moc_LoginDialog.o
 ./release\moc_MainWindow.o

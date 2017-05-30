@@ -1,5 +1,6 @@
 #include "TubePageModel.h"
 #include <ORM/TubeGateway.h>
+#include <ORM/DrinkGateway.h>
 
 TubePageModel::TubePageModel(QObject *parent)
     : QAbstractTableModel(parent)
@@ -29,10 +30,20 @@ QVariant TubePageModel::data(const QModelIndex &index, int role) const
     Tube item = _items.value(index.row());
     if (role == Qt::DisplayRole)
     {
-        if (item.isValid())
+        if (index.column() == 1)
         {
-            return item.data(index.column());
+            Drink drink = _drinks.value(item.drinkId);
+            if (drink.isValid())
+                return drink.name;
+            else
+                return QString("---");
         }
+        return item.data(index.column());
+    }
+    else if (role == Qt::EditRole)
+    {
+        if (index.column() == 1)
+            return item.drinkId;
     }
 
     return QVariant();
@@ -81,7 +92,13 @@ void TubePageModel::resetData()
     _removedItems.clear();
 
     TubeGateway itemGateway;
-    itemGateway.getTubes(_items);
+    itemGateway.getItems(_items);
+
+    QList<Drink> drinks;
+    DrinkGateway drinkGateway;
+    drinkGateway.getItems(drinks);
+    foreach (Drink drink, drinks)
+        _drinks.insert(drink.drinkId, drink);
 
     endResetModel();
 
@@ -108,7 +125,7 @@ void TubePageModel::removeItem(const QModelIndex &index)
     endRemoveRows();
 }
 
-QList<Tube> TubePageModel::getTubes()
+QList<Tube> TubePageModel::getItems()
 {
     QList<Tube> result = _items;
     result += _removedItems;

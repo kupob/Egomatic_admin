@@ -11,6 +11,8 @@ class FlowHistory
 public:
     FlowHistory()
     {
+        amount = 0.f;
+        spent = 0.f;
         isActive = true;
     }
 
@@ -19,21 +21,23 @@ public:
     QString     flowHistoryId;  //  flowhistoryid uuid NOT NULL, -- Идентификатор записи
     QDateTime   flowTime;       //  flowtime timestamp without time zone, -- Дата и время налива напитка
     QString     drinkId;        //  drinkid uuid, -- Идентификатор напитка
-    float       amount;         //  amount real, -- Налитый объем
+    float       amount;         //  amount real DEFAULT 0.0, -- Налитый объем
+    float       spent;          //  spent real DEFAULT 0.0, -- Уплаченная стоимость
     QString     customerId;     //  customerid uuid, -- Идентификатор клиента
     bool        isActive;       //  isactive boolean DEFAULT true, -- Флаг активности
 
-    static const int fieldCount = 6;
-    static const int columnCount = 4;
+    static const int fieldCount = 7;
+    static const int columnCount = 5;
 
 public:
     QVariant data(int position) const
     {
         switch (position) {
         case 0:     return QVariant::fromValue(flowTime);
-        case 1:     return QVariant::fromValue(drinkId);
-        case 2:     return QVariant::fromValue(amount);
-        case 3:     return QVariant::fromValue(customerId);
+        case 1:     return QVariant::fromValue(customerId);
+        case 2:     return QVariant::fromValue(drinkId);
+        case 3:     return QVariant::fromValue(QString::number(amount, 'f', 2) + " л.");
+        case 4:     return QVariant::fromValue(QString::number(spent, 'f', 2) + " р.");
         default:    return QVariant();
         }
     }
@@ -42,9 +46,10 @@ public:
     {
         switch (position) {
         case 0:     return QString("Дата и время");
-        case 1:     return QString("Напиток");
-        case 2:     return QString("Объем");
-        case 3:     return QString("Посетитель");
+        case 1:     return QString("Посетитель");
+        case 2:     return QString("Напиток");
+        case 3:     return QString("Объем");
+        case 4:     return QString("Стоимость");
         default:    return QVariant();
         }
     }
@@ -62,8 +67,9 @@ public:
             flowHistory.flowTime      = singleData.value(1).toDateTime();
             flowHistory.drinkId       = singleData.value(2).toString();
             flowHistory.amount        = singleData.value(3).toFloat();
-            flowHistory.customerId    = singleData.value(4).toString();
-            flowHistory.isActive      = singleData.value(5).toBool();
+            flowHistory.spent         = singleData.value(4).toFloat();
+            flowHistory.customerId    = singleData.value(5).toString();
+            flowHistory.isActive      = singleData.value(6).toBool();
 
             result.append(flowHistory);
         }
