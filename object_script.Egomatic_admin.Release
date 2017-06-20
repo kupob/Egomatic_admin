@@ -26,6 +26,11 @@ INPUT(
 ./release\FlowHistoryPageModel.o
 ./release\CustomerGateway.o
 ./release\DeviceTypeDelegate.o
+./release\UserGateway.o
+./release\CustomerPageModel.o
+./release\CustomerPage.o
+./release\UserPageModel.o
+./release\UserPage.o
 ./release\moc_ItemPage.o
 ./release\moc_LoginDialog.o
 ./release\moc_MainWindow.o

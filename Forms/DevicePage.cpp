@@ -35,12 +35,12 @@ void DevicePage::removeItem()
 
 void DevicePage::save()
 {
-    QList<Device> devices = _model->getDevices();
+    QList<Device> items = _model->getDevices();
     DeviceGateway deviceGateway;
 
     bool ok = false;
-    if (!devices.isEmpty())
-        ok = deviceGateway.saveDevices(devices);
+    if (!items.isEmpty())
+        ok = deviceGateway.saveItems(items);
 
     if (ok)
         _model->resetData();

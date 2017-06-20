@@ -24,14 +24,17 @@ void LoginDialog::checkAuth()
 {
     QString userName = ui->usernameLineEdit->text();
     QString password = ui->passwordLineEdit->text();
-    QString userNameEncr = QCryptographicHash::hash(userName.toUtf8(), QCryptographicHash::Md5).toHex();
-    QString passwordEncr = QCryptographicHash::hash(userNameEncr.toUtf8() + password.toUtf8(), QCryptographicHash::Md5).toHex();
+//    QString userNameEncr = QCryptographicHash::hash(userName.toUtf8(), QCryptographicHash::Md5).toHex();
+//    QString passwordEncr = QCryptographicHash::hash(userNameEncr.toUtf8() + password.toUtf8(), QCryptographicHash::Md5).toHex();
+    QString passwordEncr = QCryptographicHash::hash(QString("egomatic").toUtf8() + password.toUtf8(), QCryptographicHash::Md5).toHex();
 
     DbAdapter *db = DbAdapter::instance();
-    bool ok = db->tryLogin(userName, passwordEncr);
+    bool isAdmin = false;
+    bool ok = db->tryLogin(userName, passwordEncr, isAdmin);
 
     if (ok)
     {
+        emit authAsAdmin(isAdmin);
         emit authSuccess();
         close();
     }

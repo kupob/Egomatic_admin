@@ -12,7 +12,7 @@ public:
     DeviceGateway();
 
     bool getDevices(QList<Device> &data);
-    bool saveDevices(QList<Device> data);
+    bool saveItems(QList<Device> data);
 
 private:
     DbAdapter* _db;

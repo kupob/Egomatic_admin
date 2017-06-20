@@ -128,12 +128,12 @@ bool DbAdapter::getResult(QSqlQuery query, QStringList &data, bool execBatch)
     return ok;
 }
 
-bool DbAdapter::tryLogin(const QString &login, const QString &password)
+bool DbAdapter::tryLogin(const QString &login, const QString &password, bool &isAdmin)
 {
     QList< QList<QVariant> > data;
     QSqlQuery query(_db);
 
-    query.prepare("SELECT userid FROM sys_user "
+    query.prepare("SELECT isadmin FROM sys_user "
                   "WHERE login = :login "
                   "AND password = :password;");
 
@@ -141,6 +141,8 @@ bool DbAdapter::tryLogin(const QString &login, const QString &password)
     query.bindValue(":password", password);
 
     bool queryResult = getResult(query, data);
+    if (!data.isEmpty())
+        isAdmin = data.first().first().toBool();
 
     return queryResult && !data.isEmpty();
 }

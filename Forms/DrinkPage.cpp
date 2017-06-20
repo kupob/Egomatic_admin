@@ -31,12 +31,12 @@ void DrinkPage::removeItem()
 
 void DrinkPage::save()
 {
-    QList<Drink> drinks = _model->getItems();
+    QList<Drink> items = _model->getItems();
     DrinkGateway drinkGateway;
 
     bool ok = false;
-    if (!drinks.isEmpty())
-        ok = drinkGateway.saveItems(drinks);
+    if (!items.isEmpty())
+        ok = drinkGateway.saveItems(items);
 
     if (ok)
         _model->resetData();

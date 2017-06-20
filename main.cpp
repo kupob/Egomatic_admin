@@ -3,7 +3,7 @@
 #include "Utils/DbAdapter.h"
 #include "Utils/ConfigReader.h"
 #include <QApplication>
-#include <QDebug>
+#include <QFile>
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +16,12 @@ int main(int argc, char *argv[])
 
     ConfigReader configReader;
 
+    QFile qssFile("./Styles/style.qss");
+    qssFile.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(qssFile.readAll());
+
+    qApp->setStyleSheet(styleSheet);
+
     DbAdapter *dbAdapter = DbAdapter::instance();
     bool connectionOpened = dbAdapter->createConnection(
                 configReader.dbHost(),
@@ -24,8 +30,6 @@ int main(int argc, char *argv[])
                 configReader.dbPassword(),
                 configReader.dbPort());
 
-    qDebug() << connectionOpened;
-
     LoginDialog loginDialog;
     loginDialog.show();
 
@@ -33,6 +37,7 @@ int main(int argc, char *argv[])
     mainWindow.show();
     mainWindow.hide();
 
+    a.connect(&loginDialog, SIGNAL(authAsAdmin(bool)), &mainWindow, SLOT(showAsAdmin(bool)));
     a.connect(&loginDialog, SIGNAL(authSuccess()), &mainWindow, SLOT(show()));
 
     return a.exec();

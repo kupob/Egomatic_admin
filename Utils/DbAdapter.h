@@ -22,7 +22,7 @@ public:
     QString getUuid();
     QSqlQuery getQuery();
 
-    bool tryLogin(const QString& login, const QString& password);
+    bool tryLogin(const QString& login, const QString& password, bool& isAdmin);
 
     bool getResult(QString query, QList< QList<QVariant> >& data);
     bool getResult(QSqlQuery query, bool execBatch = false);

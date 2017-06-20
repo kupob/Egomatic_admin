@@ -107,7 +107,7 @@ void ControllerPageModel::removeItem(const QModelIndex &index)
     endRemoveRows();
 }
 
-QList<Controller> ControllerPageModel::getControllers()
+QList<Controller> ControllerPageModel::getItems()
 {
     QList<Controller> result = _items;
     result += _removedItems;

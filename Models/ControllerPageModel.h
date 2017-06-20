@@ -22,7 +22,7 @@ public:
     void addItem(const Controller& item);
     void removeItem(const QModelIndex& index);
 
-    QList<Controller> getControllers();
+    QList<Controller> getItems();
 
 private:
     QList<Controller> _items;

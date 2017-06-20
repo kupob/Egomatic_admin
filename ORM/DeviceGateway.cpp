@@ -20,7 +20,7 @@ bool DeviceGateway::getDevices(QList<Device> &data)
     return queryResult && !data.isEmpty();
 }
 
-bool DeviceGateway::saveDevices(QList<Device> data)
+bool DeviceGateway::saveItems(QList<Device> data)
 {
     QSqlQuery selectQuery = _db->getQuery();
     QSqlQuery insertQuery = _db->getQuery();

@@ -21,6 +21,7 @@ private slots:
 signals:
     void authSuccess();
     void authFailed();
+    void authAsAdmin(bool isAdmin);
 
 private:
     Ui::LoginDialog *ui;

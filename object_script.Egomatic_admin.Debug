@@ -26,6 +26,11 @@ INPUT(
 ./debug\FlowHistoryPageModel.o
 ./debug\CustomerGateway.o
 ./debug\DeviceTypeDelegate.o
+./debug\UserGateway.o
+./debug\CustomerPageModel.o
+./debug\CustomerPage.o
+./debug\UserPageModel.o
+./debug\UserPage.o
 ./debug\moc_ItemPage.o
 ./debug\moc_LoginDialog.o
 ./debug\moc_MainWindow.o

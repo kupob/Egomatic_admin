@@ -40,6 +40,23 @@ public:
         }
     }
 
+    void setData(int position, QVariant value)
+    {
+        switch (position) {
+        case 0:
+            name = value.toString();
+            break;
+        case 1:
+            balance = value.toFloat();
+            break;
+        case 3:
+            rfid = value.toUInt();
+            break;
+        default:
+            break;
+        }
+    }
+
     static QVariant headerData(int position)
     {
         switch (position) {

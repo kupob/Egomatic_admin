@@ -20,7 +20,7 @@ bool ControllerGateway::getControllers(QList<Controller> &data)
     return queryResult && !data.isEmpty();
 }
 
-bool ControllerGateway::saveControllers(QList<Controller> data)
+bool ControllerGateway::saveItems(QList<Controller> data)
 {
     QSqlQuery selectQuery = _db->getQuery();
     QSqlQuery insertQuery = _db->getQuery();

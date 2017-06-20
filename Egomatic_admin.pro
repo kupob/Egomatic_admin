@@ -64,7 +64,13 @@ HEADERS += \
     Models/FlowHistoryPageModel.h \
     ORM/Customer.h \
     ORM/CustomerGateway.h \
-    Models/DeviceTypeDelegate.h
+    Models/DeviceTypeDelegate.h \
+    ORM/User.h \
+    ORM/UserGateway.h \
+    Models/CustomerPageModel.h \
+    Forms/CustomerPage.h \
+    Models/UserPageModel.h \
+    Forms/UserPage.h
 
 SOURCES += \
     Forms/ItemPage.cpp \
@@ -93,7 +99,12 @@ SOURCES += \
     Forms/FlowHistoryPage.cpp \
     Models/FlowHistoryPageModel.cpp \
     ORM/CustomerGateway.cpp \
-    Models/DeviceTypeDelegate.cpp
+    Models/DeviceTypeDelegate.cpp \
+    ORM/UserGateway.cpp \
+    Models/CustomerPageModel.cpp \
+    Forms/CustomerPage.cpp \
+    Models/UserPageModel.cpp \
+    Forms/UserPage.cpp
 
 
 

@@ -31,12 +31,12 @@ void ControllerPage::removeItem()
 
 void ControllerPage::save()
 {
-    QList<Controller> controllers = _model->getControllers();
+    QList<Controller> items = _model->getItems();
     ControllerGateway controllerGateway;
 
     bool ok = false;
-    if (!controllers.isEmpty())
-        ok = controllerGateway.saveControllers(controllers);
+    if (!items.isEmpty())
+        ok = controllerGateway.saveItems(items);
 
     if (ok)
         _model->resetData();

@@ -12,7 +12,7 @@ public:
     ControllerGateway();
 
     bool getControllers(QList<Controller> &data);
-    bool saveControllers(QList<Controller> data);
+    bool saveItems(QList<Controller> data);
 
 private:
     DbAdapter* _db;
